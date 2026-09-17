@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout Source Code') {
             steps {
                 // Replace with your actual GitHub username and repository name
-                git branch: 'main', url: 'https://github.com/<student-username>/<repo-name>.git'
+                git branch: 'main', url: 'https://github.com/saquib-18/assessment-7.git'
             }
         }
         
