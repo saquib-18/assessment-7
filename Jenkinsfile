@@ -1,30 +1,25 @@
 pipeline {
     agent any
     
-    parameters {
-        choice(name: 'EXAM_MODULE', choices: ['student-portal', 'examiner-dashboard', 'evaluation-engine'], description: 'Select the module of the Online Examination System to build')
-        choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'Select the target deployment environment')
-    }
-    
     stages {
-        stage('Checkout Source Code') {
+        stage('Checkout Source') {
             steps {
-                // Replace with your actual GitHub username and repository name
+                // Replace with your repository URL
                 git branch: 'main', url: 'https://github.com/saquib-18/assessment-7.git'
             }
         }
         
-        stage('Show Selected Parameters') {
+        stage('Generate Exam Report') {
             steps {
-                echo "Selected Examination Module: ${params.EXAM_MODULE}"
-                echo "Selected Target Environment: ${params.ENVIRONMENT}"
+                // Use 'sh' if running on a Linux Jenkins agent
+                bat 'python generate_exam_report.py'
             }
         }
         
-        stage('Build Module for Environment') {
+        stage('Archive Exam Artifacts') {
             steps {
-                echo "Compiling and packaging the ${params.EXAM_MODULE} for the ${params.ENVIRONMENT} environment..."
-                echo "Build process completed successfully!"
+                // Saves the report so it can be downloaded directly from Jenkins UI
+                archiveArtifacts artifacts: 'exam_report.txt', fingerprint: true
             }
         }
     }
