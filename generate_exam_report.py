@@ -4,7 +4,7 @@ with open("exam_report.txt", "w") as f:
     f.write("ONLINE EXAMINATION & EVALUATION SYSTEM\n")
     f.write("=========================================\n")
     f.write("Exam Title: Midterm Python Programming\n")
-    f.write("Total Students Evaluated: 150\n")
+    f.write("Total Students Evaluated: 200\n")
     f.write("Passed: 135\n")
     f.write("Failed: 15\n")
     f.write("Average Score: 82.5%\n")
